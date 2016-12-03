@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP#-}
 #if __GLASGOW_HASKELL__ >= 709
 {-# LANGUAGE Safe #-}
 #else
@@ -29,7 +30,7 @@
 --
 -----------------------------------------------------------------------------
 
-#include "HsUnix.h"
+-- #include "HsUnix.h"
 
 module System.Posix.Files (
     -- * File modes

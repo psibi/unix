@@ -16,42 +16,42 @@
 
 module System.Posix (
   module System.Posix.Types,
-  module System.Posix.Signals,
-  module System.Posix.Directory,
+  -- module System.Posix.Signals,
+  -- module System.Posix.Directory,
   module System.Posix.Files,
-  module System.Posix.Unistd,
-  module System.Posix.IO,
-  module System.Posix.Env,
-  module System.Posix.Process,
-  module System.Posix.Temp,
-  module System.Posix.Terminal,
-  module System.Posix.Time,
-  module System.Posix.User,
-  module System.Posix.Resource,
-  module System.Posix.Semaphore,
-  module System.Posix.SharedMem,
-  module System.Posix.DynamicLinker,
+  -- module System.Posix.Unistd,
+  -- module System.Posix.IO,
+  -- module System.Posix.Env,
+  -- module System.Posix.Process,
+  -- module System.Posix.Temp,
+  -- module System.Posix.Terminal,
+  -- module System.Posix.Time,
+  -- module System.Posix.User,
+  -- module System.Posix.Resource,
+  -- module System.Posix.Semaphore,
+  -- module System.Posix.SharedMem,
+  -- module System.Posix.DynamicLinker,
 -- XXX 'Module' type clashes with GHC
 --  module System.Posix.DynamicLinker.Module
  ) where
 
 import System.Posix.Types
-import System.Posix.Signals
-import System.Posix.Directory
+-- import System.Posix.Signals
+-- import System.Posix.Directory
 import System.Posix.Files
-import System.Posix.Unistd
-import System.Posix.Process
-import System.Posix.IO
-import System.Posix.Env
-import System.Posix.Temp
-import System.Posix.Terminal
-import System.Posix.Time
-import System.Posix.User
-import System.Posix.Resource
-import System.Posix.Semaphore
-import System.Posix.SharedMem
+-- import System.Posix.Unistd
+-- import System.Posix.Process
+-- import System.Posix.IO
+-- import System.Posix.Env
+-- import System.Posix.Temp
+-- import System.Posix.Terminal
+-- import System.Posix.Time
+-- import System.Posix.User
+-- import System.Posix.Resource
+-- import System.Posix.Semaphore
+-- import System.Posix.SharedMem
 -- XXX: bad planning, we have two constructors called "Default"
-import System.Posix.DynamicLinker hiding (Default)
+-- import System.Posix.DynamicLinker hiding (Default)
 --import System.Posix.DynamicLinker.Module
 
 {- TODO

@@ -8,7 +8,7 @@ homepage:       https://github.com/haskell/unix
 bug-reports:    https://github.com/haskell/unix/issues
 synopsis:       POSIX functionality
 category:       System
-build-type:     Configure
+build-type:     Simple
 cabal-version:  >= 1.10
 tested-with:    GHC>=7.4.1
 description:
@@ -22,21 +22,21 @@ description:
 
 extra-source-files:
     changelog.md
-    config.guess
-    config.sub
-    configure
-    configure.ac
-    include/HsUnix.h
-    include/HsUnixConfig.h.in
-    install-sh
-    unix.buildinfo.in
+    -- config.guess
+    -- config.sub
+    -- configure
+    -- configure.ac
+    -- include/HsUnix.h
+    -- include/HsUnixConfig.h.in
+    -- install-sh
+    -- unix.buildinfo.in
 
 extra-tmp-files:
-    autom4te.cache
-    config.log
-    config.status
-    include/HsUnixConfig.h
-    unix.buildinfo
+    -- autom4te.cache
+    -- config.log
+    -- config.status
+    -- include/HsUnixConfig.h
+    -- unix.buildinfo
 
 source-repository head
     type:     git
@@ -66,69 +66,71 @@ library
         bytestring  >= 0.9.2   && < 0.11,
         time        >= 1.2     && < 1.8
 
+    java-sources: java/Utils.java
+
     exposed-modules:
         System.Posix
-        System.Posix.ByteString
+        -- System.Posix.ByteString
 
-        System.Posix.Error
-        System.Posix.Resource
-        System.Posix.Time
-        System.Posix.Unistd
-        System.Posix.User
-        System.Posix.Signals
-        System.Posix.Signals.Exts
-        System.Posix.Semaphore
-        System.Posix.SharedMem
+        -- System.Posix.Error
+        -- System.Posix.Resource
+        -- System.Posix.Time
+        -- System.Posix.Unistd
+        -- System.Posix.User
+        -- System.Posix.Signals
+        -- System.Posix.Signals.Exts
+        -- System.Posix.Semaphore
+        -- System.Posix.SharedMem
 
-        System.Posix.ByteString.FilePath
+        -- System.Posix.ByteString.FilePath
 
-        System.Posix.Directory
-        System.Posix.Directory.ByteString
+        -- System.Posix.Directory
+        -- System.Posix.Directory.ByteString
 
-        System.Posix.DynamicLinker.Module
-        System.Posix.DynamicLinker.Module.ByteString
-        System.Posix.DynamicLinker.Prim
-        System.Posix.DynamicLinker.ByteString
-        System.Posix.DynamicLinker
+        -- System.Posix.DynamicLinker.Module
+        -- System.Posix.DynamicLinker.Module.ByteString
+        -- System.Posix.DynamicLinker.Prim
+        -- System.Posix.DynamicLinker.ByteString
+        -- System.Posix.DynamicLinker
 
         System.Posix.Files
-        System.Posix.Files.ByteString
+        -- System.Posix.Files.ByteString
 
-        System.Posix.IO
-        System.Posix.IO.ByteString
+        -- System.Posix.IO
+        -- System.Posix.IO.ByteString
 
-        System.Posix.Env
-        System.Posix.Env.ByteString
+        -- System.Posix.Env
+        -- System.Posix.Env.ByteString
 
-        System.Posix.Fcntl
+        -- System.Posix.Fcntl
 
-        System.Posix.Process
-        System.Posix.Process.Internals
-        System.Posix.Process.ByteString
+        -- System.Posix.Process
+        -- System.Posix.Process.Internals
+        -- System.Posix.Process.ByteString
 
-        System.Posix.Temp
-        System.Posix.Temp.ByteString
+        -- System.Posix.Temp
+        -- System.Posix.Temp.ByteString
 
-        System.Posix.Terminal
-        System.Posix.Terminal.ByteString
+        -- System.Posix.Terminal
+        -- System.Posix.Terminal.ByteString
 
     other-modules:
-        System.Posix.Directory.Common
-        System.Posix.DynamicLinker.Common
+        -- System.Posix.Directory.Common
+        -- System.Posix.DynamicLinker.Common
         System.Posix.Files.Common
-        System.Posix.IO.Common
-        System.Posix.Process.Common
-        System.Posix.Terminal.Common
+        -- System.Posix.IO.Common
+        -- System.Posix.Process.Common
+        -- System.Posix.Terminal.Common
 
     ghc-options: -Wall
 
-    include-dirs: include
-    includes:
-        HsUnix.h
-        execvpe.h
-    install-includes:
-        HsUnix.h
-        execvpe.h
-    c-sources:
-        cbits/HsUnix.c
-        cbits/execvpe.c
+    include-dirs:
+    -- includes:
+        -- HsUnix.h
+        -- execvpe.h
+    -- install-includes:
+        -- HsUnix.h
+        -- execvpe.h
+    -- c-sources:
+    --     cbits/HsUnix.c
+    --     cbits/execvpe.c

@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE Trustworthy #-}
 
 -----------------------------------------------------------------------------
@@ -24,7 +25,7 @@
 --
 -----------------------------------------------------------------------------
 
-#include "HsUnix.h"
+-- #include "HsUnix.h"
 
 module System.Posix.Files.Common (
     -- * File modes
@@ -79,7 +80,7 @@ module System.Posix.Files.Common (
 #endif
   ) where
 
-import System.Posix.Types
+import System.Posix.Types hiding (FileMode)
 import System.IO.Unsafe
 import Data.Bits
 import Data.Int
@@ -100,120 +101,124 @@ import Foreign.Storable
 -- The abstract type 'FileMode', constants and operators for
 -- manipulating the file modes defined by POSIX.
 
+data FileMode = FileMode [String]
+
+
 -- | No permissions.
-nullFileMode :: FileMode
-nullFileMode = 0
+nullFileMode :: FileMode 
+nullFileMode = FileMode []
 
 -- | Owner has read permission.
 ownerReadMode :: FileMode
-ownerReadMode = (#const S_IRUSR)
+ownerReadMode = undefined
 
 -- | Owner has write permission.
 ownerWriteMode :: FileMode
-ownerWriteMode = (#const S_IWUSR)
+ownerWriteMode = undefined 
 
 -- | Owner has execute permission.
 ownerExecuteMode :: FileMode
-ownerExecuteMode = (#const S_IXUSR)
+ownerExecuteMode = undefined
 
 -- | Group has read permission.
 groupReadMode :: FileMode
-groupReadMode = (#const S_IRGRP)
+groupReadMode = undefined 
 
 -- | Group has write permission.
 groupWriteMode :: FileMode
-groupWriteMode = (#const S_IWGRP)
+groupWriteMode = undefined
 
 -- | Group has execute permission.
 groupExecuteMode :: FileMode
-groupExecuteMode = (#const S_IXGRP)
+groupExecuteMode = undefined
 
 -- | Others have read permission.
 otherReadMode :: FileMode
-otherReadMode = (#const S_IROTH)
+otherReadMode = undefined
 
 -- | Others have write permission.
 otherWriteMode :: FileMode
-otherWriteMode = (#const S_IWOTH)
+otherWriteMode = undefined
 
 -- | Others have execute permission.
 otherExecuteMode :: FileMode
-otherExecuteMode = (#const S_IXOTH)
+otherExecuteMode = undefined
 
 -- | Set user ID on execution.
 setUserIDMode :: FileMode
-setUserIDMode = (#const S_ISUID)
+setUserIDMode = undefined
 
 -- | Set group ID on execution.
 setGroupIDMode :: FileMode
-setGroupIDMode = (#const S_ISGID)
+setGroupIDMode = undefined
 
 -- | Owner, group and others have read and write permission.
 stdFileMode :: FileMode
-stdFileMode = ownerReadMode  .|. ownerWriteMode .|.
-              groupReadMode  .|. groupWriteMode .|.
-              otherReadMode  .|. otherWriteMode
+stdFileMode = undefined
+-- stdFileMode = ownerReadMode  .|. ownerWriteMode .|.
+--               groupReadMode  .|. groupWriteMode .|.
+--               otherReadMode  .|. otherWriteMode
 
 -- | Owner has read, write and execute permission.
 ownerModes :: FileMode
-ownerModes = (#const S_IRWXU)
+ownerModes = undefined -- (#const S_IRWXU)
 
 -- | Group has read, write and execute permission.
 groupModes :: FileMode
-groupModes = (#const S_IRWXG)
+groupModes = undefined -- (#const S_IRWXG)
 
 -- | Others have read, write and execute permission.
 otherModes :: FileMode
-otherModes = (#const S_IRWXO)
+otherModes = undefined -- (#const S_IRWXO)
 
 -- | Owner, group and others have read, write and execute permission.
 accessModes :: FileMode
-accessModes = ownerModes .|. groupModes .|. otherModes
+accessModes = undefined -- ownerModes .|. groupModes .|. otherModes
 
 -- | Combines the two file modes into one that contains modes that appear in
 -- either.
-unionFileModes :: FileMode -> FileMode -> FileMode
-unionFileModes m1 m2 = m1 .|. m2
+-- unionFileModes :: FileMode -> FileMode -> FileMode
+-- unionFileModes m1 m2 = m1 .|. m2
 
 -- | Combines two file modes into one that only contains modes that appear in
 -- both.
-intersectFileModes :: FileMode -> FileMode -> FileMode
-intersectFileModes m1 m2 = m1 .&. m2
+-- intersectFileModes :: FileMode -> FileMode -> FileMode
+-- intersectFileModes m1 m2 = m1 .&. m2
 
-fileTypeModes :: FileMode
-fileTypeModes = (#const S_IFMT)
+-- fileTypeModes :: FileMode
+-- fileTypeModes = (#const S_IFMT)
 
-blockSpecialMode :: FileMode
-blockSpecialMode = (#const S_IFBLK)
+-- blockSpecialMode :: FileMode
+-- blockSpecialMode = (#const S_IFBLK)
 
-characterSpecialMode :: FileMode
-characterSpecialMode = (#const S_IFCHR)
+-- characterSpecialMode :: FileMode
+-- characterSpecialMode = (#const S_IFCHR)
 
-namedPipeMode :: FileMode
-namedPipeMode = (#const S_IFIFO)
+-- namedPipeMode :: FileMode
+-- namedPipeMode = (#const S_IFIFO)
 
-regularFileMode :: FileMode
-regularFileMode = (#const S_IFREG)
+-- regularFileMode :: FileMode
+-- regularFileMode = (#const S_IFREG)
 
-directoryMode :: FileMode
-directoryMode = (#const S_IFDIR)
+-- directoryMode :: FileMode
+-- directoryMode = (#const S_IFDIR)
 
-symbolicLinkMode :: FileMode
-symbolicLinkMode = (#const S_IFLNK)
+-- symbolicLinkMode :: FileMode
+-- symbolicLinkMode = (#const S_IFLNK)
 
-socketMode :: FileMode
-socketMode = (#const S_IFSOCK)
+-- socketMode :: FileMode
+-- socketMode = (#const S_IFSOCK)
 
 -- | @setFdMode fd mode@ acts like 'setFileMode' but uses a file descriptor
 -- @fd@ instead of a 'FilePath'.
 --
 -- Note: calls @fchmod@.
-setFdMode :: Fd -> FileMode -> IO ()
-setFdMode (Fd fd) m =
-  throwErrnoIfMinus1_ "setFdMode" (c_fchmod fd m)
+-- setFdMode :: Fd -> FileMode -> IO ()
+-- setFdMode (Fd fd) m =
+--   throwErrnoIfMinus1_ "setFdMode" (c_fchmod fd m)
 
-foreign import ccall unsafe "fchmod"
-  c_fchmod :: CInt -> CMode -> IO CInt
+-- foreign import ccall unsafe "fchmod"
+--   c_fchmod :: CInt -> CMode -> IO CInt
 
 -- | @setFileCreationMask mode@ sets the file mode creation mask to @mode@.
 -- Modes set by this operation are subtracted from files and directories upon
@@ -431,16 +436,16 @@ foreign import ccall unsafe "futimens"
 
 data CTimeVal = CTimeVal CLong CLong
 
-instance Storable CTimeVal where
-    sizeOf    _ = #size struct timeval
-    alignment _ = alignment (undefined :: CInt)
-    poke p (CTimeVal sec usec) = do
-        (#poke struct timeval, tv_sec ) p sec
-        (#poke struct timeval, tv_usec) p usec
-    peek p = do
-        sec  <- #{peek struct timeval, tv_sec } p
-        usec <- #{peek struct timeval, tv_usec} p
-        return $ CTimeVal sec usec
+-- instance Storable CTimeVal where
+--     sizeOf    _ = #size struct timeval
+--     alignment _ = alignment (undefined :: CInt)
+--     poke p (CTimeVal sec usec) = do
+--         (#poke struct timeval, tv_sec ) p sec
+--         (#poke struct timeval, tv_usec) p usec
+--     peek p = do
+--         sec  <- #{peek struct timeval, tv_sec } p
+--         usec <- #{peek struct timeval, tv_usec} p
+--         return $ CTimeVal sec usec
 
 toCTimeVal :: POSIXTime -> CTimeVal
 toCTimeVal t = CTimeVal sec (truncate $ 10^(6::Int) * frac)
